@@ -1,5 +1,14 @@
 import { styled } from "../styles"
 
+export default function Home() {
+  return (
+    <Button>
+      Submit
+      <span> ASAP</span>
+    </Button>
+  )
+}
+
 const Button = styled('button', {
   backgroundColor: '$green300',
   borderRadius: 4,
@@ -14,12 +23,3 @@ const Button = styled('button', {
     filter: 'brightness(0.8)'
   }
 });
-
-export default function Home() {
-  return (
-    <Button>
-      Submit
-      <span> ASAP</span>
-    </Button>
-  )
-}
