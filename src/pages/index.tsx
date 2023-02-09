@@ -10,13 +10,16 @@ import Stripe from "stripe";
 import { stripe } from "../lib/stripe";
 import Link from "next/link";
 
+export interface IProduct {
+  id: string;
+  name: string;
+  imageUrl: string;
+  price: number;
+  description: string;
+}
+
 interface IHomeProps {
-  products: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: number;
-  }[]
+  products: IProduct[];
 }
 
 export default function Home({ products }: IHomeProps) {
