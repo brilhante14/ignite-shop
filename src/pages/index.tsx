@@ -16,6 +16,7 @@ export interface IProduct {
   imageUrl: string;
   price: string;
   description: string;
+  defaultPriceId: string;
 }
 
 interface IHomeProps {
