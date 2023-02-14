@@ -1,4 +1,5 @@
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
+import Image from "next/image";
 import Stripe from "stripe";
 import { IProduct } from "..";
 import { stripe } from "../../lib/stripe";
@@ -12,18 +13,25 @@ export default function Product({ product }: IProductProps) {
    return (
       <ProductContainer>
          <ImageContainer>
-            aaaaaaaaaaaaaaaaa
+            <Image src={product.imageUrl} alt={`${product.name}`} width={520} height={480} />
          </ImageContainer>
 
          <ProductDetails>
-            <h1>Camiseta X</h1>
-            <span>R$79,00</span>
+            <h1>{product.name}</h1>
+            <span>{product.price}</span>
 
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa, expedita dignissimos recusandae aperiam esse iusto rem autem dolorum facilis quam quibusdam laboriosam odit assumenda qui error ipsum necessitatibus! Culpa, eaque.</p>
+            <p>{product.description}</p>
             <button>Comprar agora</button>
          </ProductDetails>
       </ProductContainer>
    );
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+   return {
+      paths: [],
+      fallback: 'blocking',
+   }
 }
 
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ params }) => {
