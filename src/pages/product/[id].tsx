@@ -1,5 +1,6 @@
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import Stripe from "stripe";
 import { IProduct } from "..";
@@ -18,7 +19,7 @@ export default function Product({ product }: IProductProps) {
          });
 
          const { checkoutUrl } = response.data;
-         
+
          window.location.href = checkoutUrl;
       } catch (error) {
          alert("Falha ao redirecionar ao checkout!");
@@ -26,19 +27,24 @@ export default function Product({ product }: IProductProps) {
    }
 
    return (
-      <ProductContainer>
-         <ImageContainer>
-            <Image src={product.imageUrl} alt={`${product.name}`} width={520} height={480} />
-         </ImageContainer>
+      <>
+         <Head>
+            <title>{product.name} | Ignite Shop</title>
+         </Head>
+         <ProductContainer>
+            <ImageContainer>
+               <Image src={product.imageUrl} alt={`${product.name}`} width={520} height={480} />
+            </ImageContainer>
 
-         <ProductDetails>
-            <h1>{product.name}</h1>
-            <span>{product.price}</span>
+            <ProductDetails>
+               <h1>{product.name}</h1>
+               <span>{product.price}</span>
 
-            <p>{product.description}</p>
-            <button onClick={handleBuy}>Comprar agora</button>
-         </ProductDetails>
-      </ProductContainer>
+               <p>{product.description}</p>
+               <button onClick={handleBuy}>Comprar agora</button>
+            </ProductDetails>
+         </ProductContainer>
+      </>
    );
 }
 
