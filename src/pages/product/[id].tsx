@@ -1,3 +1,4 @@
+import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import Stripe from "stripe";
@@ -10,8 +11,18 @@ interface IProductProps {
 }
 
 export default function Product({ product }: IProductProps) {
-   const handleBuy = () => {
-      console.log(product.defaultPriceId)
+   async function handleBuy() {
+      try {
+         const response = await axios.post('/api/checkout', {
+            priceId: product.defaultPriceId,
+         });
+
+         const { checkoutUrl } = response.data;
+         
+         window.location.href = checkoutUrl;
+      } catch (error) {
+         alert("Falha ao redirecionar ao checkout!");
+      }
    }
 
    return (
